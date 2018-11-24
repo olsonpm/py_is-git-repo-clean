@@ -22,7 +22,7 @@
 
 ### Intro
 
-##### What is it?
+#### What is it?
 
 A simple function that tests whether your git repo is clean.
 
@@ -34,7 +34,7 @@ by *clean* I mean it has:
 Installing this also exposes a cli command `is-git-repo-clean`
 
 
-##### Why create it?
+#### Why create it?
 
 I wanted to write a build script that would exit early if the git repo
 wasn't clean
@@ -49,7 +49,7 @@ $ pip install is_git_repo_clean
 
 ### Usage
 
-##### programmatic
+#### programmatic
 
 ```python
 import is_git_repo_clean
@@ -65,7 +65,7 @@ def isCleanSync(pathToGitRepo = None):
   return is_git_repo_clean.checkSync(pathToGitRepo)
 ```
 
-##### cli
+#### cli
 
 ```sh
 $ is-git-repo-clean --help
@@ -85,17 +85,17 @@ Options
 
 `is_git_repo_clean` exports the following
 
-##### `check` async (dir=os.getcwd()) => bool
+#### `check` async (dir=os.getcwd()) => bool
  - an asynchronous function that returns whether the git repo is clean
  - if the directory is not a git repo, then
    [NotAGitRepoException](#NotAGitRepoException) is thrown
 
-##### `checkSync` (dir=os.getcwd()) => bool
+#### `checkSync` (dir=os.getcwd()) => bool
  - a synchronous function that returns whether the git repo is clean
  - if the directory is not a git repo, then
    [NotAGitRepoException](#NotAGitRepoException) is thrown
 
-##### NotAGitRepoException
+#### NotAGitRepoException
  - A class which inherits Exception which you can handle separately
 
 
