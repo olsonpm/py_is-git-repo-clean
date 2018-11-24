@@ -2,12 +2,13 @@
 # Imports #
 # ------- #
 
-import os
+from ..meta import version
 from traceback import format_exc
 from textwrap import dedent
 from types import SimpleNamespace as o
 from .check import checkSync, NotAGitRepoException
 from .utils import iif
+import os
 
 
 # ---- #
@@ -22,15 +23,24 @@ twoLineSeps = os.linesep + os.linesep
 usage = dedent(
     f"""
     Usage
-    is-git-repo-clean [--dir <path>] [--silent]
-    is-git-repo-clean --help
-    is-git-repo-clean --version
+      is-git-repo-clean [--dir <path>] [--silent]
+      is-git-repo-clean --help
+      is-git-repo-clean --version
 
     Options
       dir:      path to the git repo to test.  Defaults to `os.getcwd()`
       silent:   disables output
       help:     print this
       version:  prints the version of this tool
+
+    Returns
+      <exit code>: <output>
+
+      0: yes
+      1: no
+      2: <invalid arg message>
+      3: dir is not a git repository
+      4: unexpected error occurred <error>
     """
 )
 
@@ -50,7 +60,7 @@ def getIsGitRepoClean(args):
             result.code = 0
             return result
         elif args[0] == "--version":
-            result.stdout = "0.1.7"
+            result.stdout = version
             result.code = 0
             return result
 

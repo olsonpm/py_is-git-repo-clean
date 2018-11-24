@@ -1,2 +1,4 @@
-include license.txt runTests.py is_git_repo_clean/**/* bin/**/*
-global-exclude __pycache__/**/*
+graft is_git_repo_clean
+graft bin
+include .python-version license.txt runTests.py
+global-exclude __pycache__/*

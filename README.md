@@ -71,15 +71,24 @@ def isCleanSync(pathToGitRepo = None):
 $ is-git-repo-clean --help
 
 Usage
-is-git-repo-clean [--dir <path>] [--silent]
-is-git-repo-clean --help
-is-git-repo-clean --version
+  is-git-repo-clean [--dir <path>] [--silent]
+  is-git-repo-clean --help
+  is-git-repo-clean --version
 
 Options
   dir:      path to the git repo to test.  Defaults to `os.getcwd()`
   silent:   disables output
   help:     print this
   version:  prints the version of this tool
+
+Returns
+  <exit code>: <output>
+
+  0: yes
+  1: no
+  2: <invalid arg message>
+  3: dir is not a git repository
+  4: unexpected error occurred <error>
 ```
 
 
@@ -87,18 +96,24 @@ Options
 
 `is_git_repo_clean` exports the following
 
+
 #### `check` async (dir=os.getcwd()) => bool
  - an asynchronous function that returns whether the git repo is clean
  - if the directory is not a git repo, then
    [NotAGitRepoException](#NotAGitRepoException) is thrown
+
 
 #### `checkSync` (dir=os.getcwd()) => bool
  - a synchronous function that returns whether the git repo is clean
  - if the directory is not a git repo, then
    [NotAGitRepoException](#NotAGitRepoException) is thrown
 
+
 #### NotAGitRepoException
- - A class which inherits Exception which you can handle separately
+ - a class which inherits Exception which you can handle separately
+
+
+#### version
 
 
 ### Test
