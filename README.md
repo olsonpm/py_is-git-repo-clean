@@ -1,8 +1,5 @@
 ## Is Git Repo Clean
 
-*Note: This document is best viewed [on github](github.com/olsonpm/py_simple-chalk).
-Pypi's markdown headers are all caps which presents innacurate information*
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
