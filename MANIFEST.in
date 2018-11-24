@@ -1,2 +1,2 @@
-include license.txt runTests.py is_git_repo_clean/**/*
+include license.txt runTests.py is_git_repo_clean/**/* bin/**/*
 global-exclude __pycache__/**/*

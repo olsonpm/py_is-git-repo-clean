@@ -15,6 +15,7 @@ from .utils import iif
 # ---- #
 
 options = set(["--dir", "--silent"])
+helpOrVersion = set(["--help", "--version"])
 
 twoLineSeps = os.linesep + os.linesep
 
@@ -23,11 +24,13 @@ usage = dedent(
     Usage
     is-git-repo-clean [--dir <path>] [--silent]
     is-git-repo-clean --help
+    is-git-repo-clean --version
 
     Options
       dir:      path to the git repo to test.  Defaults to `os.getcwd()`
       silent:   disables output
       help:     print this
+      version:  prints the version of this tool
     """
 )
 
@@ -41,10 +44,15 @@ def getIsGitRepoClean(args):
     result = o(stdout=None, stderr=None, code=None)
 
     numArgs = len(args)
-    if numArgs == 1 and args[0] == "--help":
-        result.stdout = usage
-        result.code = 0
-        return result
+    if numArgs == 1:
+        if args[0] == "--help":
+            result.stdout = usage
+            result.code = 0
+            return result
+        elif args[0] == "--version":
+            result.stdout = "0.1.6"
+            result.code = 0
+            return result
 
     argsObj = validateAndParseArgs(args, result)
 
@@ -93,9 +101,9 @@ def validateAndParseArgs(args, result):
     while i < len(args):
         arg = args[i]
         if arg not in options:
-            if arg == "--help":
+            if arg in helpOrVersion:
                 result.stderr = (
-                    "'--help' must be the only argument when passed"
+                    f"'{arg}' must be the only argument when passed"
                 )
             else:
                 result.stderr = f"invalid option '{arg}'"

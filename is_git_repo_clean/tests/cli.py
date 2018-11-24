@@ -55,6 +55,10 @@ def runTests():
         icon = getIcon(result.stdout == usage and result.code == 0)
         print(f"  {icon} --help")
 
+        result = getIsGitRepoClean(["--version"])
+        icon = getIcon(result.stdout == "0.1.6" and result.code == 0)
+        print(f"  {icon} --version")
+
         result = getIsGitRepoClean([])
         icon = getIcon(
             result.stderr == "dir is not a git repository" and result.code == 3
