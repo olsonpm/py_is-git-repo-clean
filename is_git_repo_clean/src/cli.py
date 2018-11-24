@@ -50,7 +50,7 @@ def getIsGitRepoClean(args):
             result.code = 0
             return result
         elif args[0] == "--version":
-            result.stdout = "0.1.6"
+            result.stdout = "0.1.7"
             result.code = 0
             return result
 

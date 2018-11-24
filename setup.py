@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="is_git_repo_clean",
-    version="0.1.6",
+    version="0.1.7",
     author="phil",
     author_email="philip.olson@pm.me",
     description="A simple function to test whether your git repo is clean",
@@ -14,5 +14,6 @@ setuptools.setup(
     url="https://github.com/olsonpm/py_is-git-repo-clean",
     packages=setuptools.find_packages(),
     scripts=["bin/is-git-repo-clean"],
+    python_requires=">=3.7",
     license="WTFNMFPL-1.0",
 )

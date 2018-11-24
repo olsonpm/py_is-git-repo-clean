@@ -56,7 +56,7 @@ def runTests():
         print(f"  {icon} --help")
 
         result = getIsGitRepoClean(["--version"])
-        icon = getIcon(result.stdout == "0.1.6" and result.code == 0)
+        icon = getIcon(result.stdout == "0.1.7" and result.code == 0)
         print(f"  {icon} --version")
 
         result = getIsGitRepoClean([])

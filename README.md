@@ -73,11 +73,13 @@ $ is-git-repo-clean --help
 Usage
 is-git-repo-clean [--dir <path>] [--silent]
 is-git-repo-clean --help
+is-git-repo-clean --version
 
 Options
   dir:      path to the git repo to test.  Defaults to `os.getcwd()`
   silent:   disables output
   help:     print this
+  version:  prints the version of this tool
 ```
 
 
