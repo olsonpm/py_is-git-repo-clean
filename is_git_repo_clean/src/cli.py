@@ -15,7 +15,7 @@ import os
 # Init #
 # ---- #
 
-options = set(["--dir", "--silent"])
+arguments = set(["--dir", "--silent"])
 helpOrVersion = set(["--help", "--version"])
 
 twoLineSeps = os.linesep + os.linesep
@@ -23,15 +23,12 @@ twoLineSeps = os.linesep + os.linesep
 usage = dedent(
     f"""
     Usage
-      is-git-repo-clean [--dir <path>] [--silent]
-      is-git-repo-clean --help
-      is-git-repo-clean --version
+      is-git-repo-clean [options]
+      is-git-repo-clean (--help | --version)
 
     Options
-      dir:      path to the git repo to test.  Defaults to `os.getcwd()`
-      silent:   disables output
-      help:     print this
-      version:  prints the version of this tool
+      --dir:      path to the git repo to test.  Defaults to `os.getcwd()`
+      --silent:   a flag which disables output
 
     Returns
       <exit code>: <output>
@@ -89,7 +86,7 @@ def getIsGitRepoClean(args):
         result.code = 3
         return result
 
-    except Exception:
+    except:
         if not isSilent:
             result.stderr = (
                 f"unexpected error occurred{twoLineSeps}" + format_exc()
@@ -106,15 +103,13 @@ def getIsGitRepoClean(args):
 
 def validateAndParseArgs(args, result):
     i = 0
-    argsObj = o(dir=None, silent=None)
+    argsObj = o(dir=None, silent=False)
 
     while i < len(args):
         arg = args[i]
-        if arg not in options:
+        if arg not in arguments:
             if arg in helpOrVersion:
-                result.stderr = (
-                    f"'{arg}' must be the only argument when passed"
-                )
+                result.stderr = f"'{arg}' must be the only argument when passed"
             else:
                 result.stderr = f"invalid option '{arg}'"
 
