@@ -14,10 +14,12 @@
 - [Api](#api)
     - [`check` async (dir=os.getcwd()) => bool](#check-async-dirosgetcwd--bool)
     - [`checkSync` (dir=os.getcwd()) => bool](#checksync-dirosgetcwd--bool)
+    - [`version`](#version)
 - [Test](#test)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<br>
 
 ### Intro
 
@@ -38,6 +40,7 @@ Installing this also exposes a cli command `is-git-repo-clean`
 I wanted to write a build script that would exit early if the git repo
 wasn't clean
 
+<br>
 
 ### Install
 
@@ -45,6 +48,7 @@ wasn't clean
 $ pip install is_git_repo_clean
 ```
 
+<br>
 
 ### Usage
 
@@ -90,6 +94,7 @@ Returns
   4: unexpected error occurred <error>
 ```
 
+<br>
 
 ### Api
 
@@ -104,8 +109,9 @@ Returns
  - a synchronous function that returns whether the git repo is clean
 
 
-#### version
+#### `version`
 
+<br>
 
 ### Test
 
