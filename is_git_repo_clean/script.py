@@ -1,7 +1,5 @@
-#! /usr/bin/env python
-
 import sys
-from is_git_repo_clean.src.cli import getIsGitRepoClean
+from .cli import getIsGitRepoClean
 
 
 def printErr(msg):
