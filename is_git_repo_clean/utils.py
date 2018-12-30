@@ -1,5 +1,14 @@
+# ------- #
+# Imports #
+# ------- #
+
 from asyncio import gather
 from types import SimpleNamespace as o
+
+
+# ---- #
+# Main #
+# ---- #
 
 
 #
@@ -21,8 +30,8 @@ async def resolveAll(awaitables):
 
 #
 # I have no idea what to name this.  Python just doesn't have a clean ternary
-#   operator which stinks and I didn't want to use 'iif' because that's
-#   unreadable.  So for now we have a verbose and less performant, but readable
+#   operator which stinks and I didn't want to use 'iif' because that's less
+#   readable.  So for now we have a verbose and less performant, but readable
 #   function chain
 #
 

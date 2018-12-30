@@ -1,3 +1,3 @@
-from is_git_repo_clean.tests import runTests
+from tests import runTests
 
 runTests()

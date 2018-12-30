@@ -2,11 +2,11 @@
 # Imports #
 # ------- #
 
-from ..meta import version
+from .meta import version
 from traceback import format_exc
 from textwrap import dedent
 from types import SimpleNamespace as o
-from .check import checkSync, NotAGitRepoException
+from .check import checkSync
 from .utils import iif
 import os
 
@@ -79,20 +79,20 @@ def getIsGitRepoClean(args):
         result.code = iif(isClean, 0, 1)
         return result
 
-    except NotAGitRepoException:
-        if not isSilent:
-            result.stderr = "dir is not a git repository"
+    except Exception as e:
+        if "is not a git repository" in str(e):
+            if not isSilent:
+                result.stderr = "dir is not a git repository"
 
-        result.code = 3
-        return result
+            result.code = 3
+        else:
+            if not isSilent:
+                result.stderr = (
+                    f"unexpected error occurred{twoLineSeps}" + format_exc()
+                )
 
-    except:
-        if not isSilent:
-            result.stderr = (
-                f"unexpected error occurred{twoLineSeps}" + format_exc()
-            )
+            result.code = 4
 
-        result.code = 4
         return result
 
 

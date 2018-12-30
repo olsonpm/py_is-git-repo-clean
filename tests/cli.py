@@ -2,9 +2,9 @@
 # Imports #
 # ------- #
 
-from ..meta import version
-from ..src.utils import iif
-from ..src.cli import getIsGitRepoClean, usage
+from is_git_repo_clean import version
+from is_git_repo_clean.utils import iif
+from is_git_repo_clean.cli import getIsGitRepoClean, usage
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 import os
 import subprocess

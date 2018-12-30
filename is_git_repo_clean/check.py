@@ -41,10 +41,6 @@ emptyGitTree = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
 # ---- #
 
 
-class NotAGitRepoException(Exception):
-    pass
-
-
 async def check(cwd=None):
     cwd = cleanCwd(cwd)
 
@@ -56,7 +52,7 @@ async def check(cwd=None):
     )
     isAGitRepo_result = await isAGitRepo_proc.wait()
     if isAGitRepo_result != 0:
-        raise NotAGitRepoException(f"'{cwd}' is not a git repository")
+        raise Exception(f"'{cwd}' is not a git repository")
 
     headExists_proc = await runAsync(
         *headExistsCmd,
@@ -110,7 +106,7 @@ def checkSync(cwd=None):
     )
 
     if not isAGitRepo:
-        raise NotAGitRepoException(f"'{cwd} is not a git repository")
+        raise Exception(f"'{cwd} is not a git repository")
 
     headExists = (
         run(

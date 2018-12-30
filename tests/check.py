@@ -2,7 +2,7 @@
 
 from types import SimpleNamespace as obj
 from tempfile import TemporaryDirectory, NamedTemporaryFile
-from .. import check, checkSync, NotAGitRepoException
+from is_git_repo_clean import check, checkSync
 from shutil import rmtree
 from os import path
 import asyncio
@@ -50,14 +50,14 @@ def makeSteps(cwd):
                 f"  {x} check({cwd}) did not raise an exception before git init"
             )
             return False
-        except NotAGitRepoException:
-            pass
-        except:
-            print(
-                f"  {x} check({cwd}) raised an incorrect exception before"
-                " git init"
-            )
-            return False
+        except Exception as e:
+            expected = "is not a git repository" in str(e)
+            if not expected:
+                print(
+                    f"  {x} check({cwd}) raised an incorrect exception before"
+                    " git init"
+                )
+                return False
 
         try:
             isClean.sync()
@@ -66,14 +66,14 @@ def makeSteps(cwd):
                 " git init"
             )
             return False
-        except NotAGitRepoException:
-            pass
-        except:
-            print(
-                f"  {x} checkSync({cwd}) raised an incorrect exception before"
-                " git init"
-            )
-            return False
+        except Exception as e:
+            expected = "is not a git repository" in str(e)
+            if not expected:
+                print(
+                    f"  {x} checkSync({cwd}) raised an incorrect exception"
+                    " before git init"
+                )
+                return False
 
         print(f"  {o} before git init")
         return True

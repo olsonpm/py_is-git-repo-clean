@@ -1,4 +1,0 @@
-graft is_git_repo_clean
-graft bin
-include .python-version license.txt runTests.py
-global-exclude __pycache__/*

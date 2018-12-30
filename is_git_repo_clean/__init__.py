@@ -1,4 +1,4 @@
 from .meta import version
-from .src import check, checkSync, NotAGitRepoException
+from .check import check, checkSync
 
-__all__ = ["check", "checkSync", "NotAGitRepoException", "version"]
+__all__ = ["check", "checkSync", "version"]

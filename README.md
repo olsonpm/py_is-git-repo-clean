@@ -14,7 +14,6 @@
 - [Api](#api)
     - [`check` async (dir=os.getcwd()) => bool](#check-async-dirosgetcwd--bool)
     - [`checkSync` (dir=os.getcwd()) => bool](#checksync-dirosgetcwd--bool)
-    - [NotAGitRepoException](#notagitrepoexception)
 - [Test](#test)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -99,18 +98,10 @@ Returns
 
 #### `check` async (dir=os.getcwd()) => bool
  - an asynchronous function that returns whether the git repo is clean
- - if the directory is not a git repo, then
-   [NotAGitRepoException](#NotAGitRepoException) is thrown
 
 
 #### `checkSync` (dir=os.getcwd()) => bool
  - a synchronous function that returns whether the git repo is clean
- - if the directory is not a git repo, then
-   [NotAGitRepoException](#NotAGitRepoException) is thrown
-
-
-#### NotAGitRepoException
- - a class which inherits Exception which you can handle separately
 
 
 #### version
