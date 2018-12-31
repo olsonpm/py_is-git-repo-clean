@@ -1,5 +1,5 @@
-import sys
 from .cli import getIsGitRepoClean
+import sys
 
 
 def printErr(msg):
@@ -12,6 +12,6 @@ if result.stdout:
     print(result.stdout)
 
 if result.stderr:
-    print(result.stderr)
+    printErr(result.stderr)
 
 exit(result.code)
