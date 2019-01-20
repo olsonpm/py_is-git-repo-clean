@@ -6,12 +6,13 @@ def printErr(msg):
     print(msg, file=sys.stderr)
 
 
-result = getIsGitRepoClean(sys.argv[1:])
+def main():
+    result = getIsGitRepoClean(sys.argv[1:])
 
-if result.stdout:
-    print(result.stdout)
+    if result.stdout:
+        print(result.stdout)
 
-if result.stderr:
-    printErr(result.stderr)
+    if result.stderr:
+        printErr(result.stderr)
 
-exit(result.code)
+    exit(result.code)
