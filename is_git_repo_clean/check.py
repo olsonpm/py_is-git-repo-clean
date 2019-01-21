@@ -8,11 +8,10 @@
 # ------- #
 
 from textwrap import dedent
+from .utils import iif, resolveAll
 import asyncio
 import os
 import subprocess
-
-from .utils import resolveAll, whenTruthy
 
 
 # ---- #
@@ -118,7 +117,8 @@ def checkSync(cwd=None):
         == 0
     )
 
-    hasNoChangesCmd = getHasNoChangesCmd(headExists)
+    hasNoStagedChangesCmd = getHasNoChangesCmd(headExists, staged=True)
+    hasNoUnstagedChangesCmd = getHasNoChangesCmd(headExists)
 
     allTracked_result = run(
         allFilesAreTrackedCmd,
@@ -128,15 +128,23 @@ def checkSync(cwd=None):
         cwd=cwd,
     )
 
-    hasNoChanges_result = run(
-        hasNoChangesCmd,
+    hasNoStagedChanges_result = run(
+        hasNoStagedChangesCmd,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        cwd=cwd,
+    )
+
+    hasNoUnstagedChanges_result = run(
+        hasNoUnstagedChangesCmd,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
         cwd=cwd,
     )
 
     return (
-        hasNoChanges_result.returncode == 0
+        hasNoStagedChanges_result.returncode == 0
+        and hasNoUnstagedChanges_result.returncode == 0
         and allTracked_result.returncode == 0
         and len(allTracked_result.stdout) == 0
     )
@@ -164,15 +172,16 @@ def cleanCwd(cwd):
     return cwd
 
 
-#
-# "NoChanges" means no staged nor unstaged changes
-#
-def getHasNoChangesCmd(headExists):
-    return [
+def getHasNoChangesCmd(headExists, staged=False):
+    cmd = [
         "git",
         "diff-index",
         "--quiet",
-        "--cached",
-        whenTruthy(headExists).return_("HEAD").otherwise(emptyGitTree),
+        iif(headExists, "HEAD", emptyGitTree),
         "--",
     ]
+
+    if staged:
+        cmd.insert(2, "--cached")
+
+    return cmd

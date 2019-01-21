@@ -103,7 +103,31 @@ def makeSteps(cwd):
         runResetGitDir()
         return result
 
-    return [beforeGitInit, gitInit, unstaged, staged, committed]
+    async def committedThenModified():
+        someFile = path.join(cwd, "some-file")
+
+        with open(someFile, "w") as f:
+            f.write("first")
+
+        runGitAddAll()
+        runSync(["git", "commit", "-m", '"initial commit"'])
+
+        with open(someFile, "w") as f:
+            f.write("second")
+
+        result = await testIsClean(False, "committed then modified")
+
+        runResetGitDir()
+        return result
+
+    return [
+        beforeGitInit,
+        gitInit,
+        unstaged,
+        staged,
+        committed,
+        committedThenModified,
+    ]
 
 
 def makeTestIsClean(cwd):
