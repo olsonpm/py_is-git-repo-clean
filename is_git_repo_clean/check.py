@@ -23,6 +23,7 @@ run = subprocess.run
 
 headExistsCmd = ["git", "rev-parse", "HEAD"]
 isAGitRepoCmd = ["git", "rev-parse", "--is-inside-work-tree"]
+refreshIndexCmd = ["git", "update-index", "--refresh"]
 # Any way to remove the double negative?
 allFilesAreTrackedCmd = [
     "git",
@@ -125,6 +126,20 @@ def checkSync(cwd=None):
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
+        cwd=cwd,
+    )
+
+    #
+    # This is required in order to get consistent results with git-diff-index
+    #
+    # for more info
+    # https://stackoverflow.com/questions/34807971/why-does-git-diff-index-head-result-change-for-touched-files-after-git-diff-or-g
+    #
+
+    run(
+        refreshIndexCmd,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
         cwd=cwd,
     )
 
